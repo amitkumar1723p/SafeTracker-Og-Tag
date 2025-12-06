@@ -1,17 +1,110 @@
-<!DOCTYPE html>
+   <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8" />
 
+  <!-- OG TAGS for WhatsApp Preview -->
   <meta property="og:title" content="Parent Tracker Invite" />
   <meta property="og:description" content="Use this code to pair your device & stay connected with family." />
-  <meta property="og:image" content="https://as1.ftcdn.net/jpg/06/72/55/64/1000_F_672556497_YZW1aibs9MYIRFEZwn5faNvPtaplioBR.webp" />
+  <meta property="og:image" content="https://the-childrens-trust-django-uat.s3.amazonaws.com/media/images/page-imagesFriendsParents_Header_890_-b188ae2c-.original.jpg" />
   <meta property="og:type" content="website" />
-
   <meta name="twitter:card" content="summary_large_image" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Parent Tracker Invite</title>
+  <title>ParentTracker – Invite</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+
+    body {
+      width: 100vw; height: 100vh;
+      background: url('https://the-childrens-trust-django-uat.s3.amazonaws.com/media/images/page-imagesFriendsParents_Header_890_-b188ae2c-.original.jpg') center/cover no-repeat;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    .overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(7px);
+      z-index: 1;
+    }
+
+    .card {
+      z-index: 2;
+      width: 90%; max-width: 380px;
+      background: rgba(255,255,255,0.2);
+      padding: 30px 26px;
+      border-radius: 25px;
+      border: 2px solid rgba(255,255,255,0.28);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      text-align: center;
+      box-shadow: 0 0 22px rgba(79,180,123,0.55);
+      position: relative;
+      overflow: hidden;
+      animation: dropFade .9s ease-out;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: -40%; left: -40%;
+      width: 180%; height: 180%;
+      background: radial-gradient(circle, rgba(74,144,226,0.4), rgba(64,200,139,0.25));
+      filter: blur(60px);
+      opacity: 0.8;
+      animation: rotatingGlow 8s linear infinite;
+    }
+
+    @keyframes rotatingGlow {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes dropFade {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .logo {
+      width: 68px; height: 68px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #4A90E2, #40C78B);
+      margin: 0 auto 12px auto;
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 36px; font-weight: bold;
+      box-shadow: 0 6px 22px rgba(0,200,139,0.33);
+    }
+
+    .title {
+      color: #fff;
+      font-size: 26px;
+      font-weight: 800;
+      text-shadow: 0px 3px 8px rgba(0,0,0,0.45);
+      margin-bottom: 10px;
+      letter-spacing: 0.6px;
+    }
+
+    .desc {
+      color: #e7f7f0;
+      font-size: 15px;
+      line-height: 22px;
+      margin-bottom: 18px;
+      opacity: 0.92;
+    }
+
+    .badge {
+      color: white;
+      font-size: 13px;
+      padding: 10px 22px;
+      background: linear-gradient(90deg, #4A90E2, #40C78B);
+      border-radius: 30px;
+      font-weight: 600;
+      display: inline-block;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+    }
+
+  </style>
 
   <script>
     function getQueryParam(param) {
@@ -20,21 +113,32 @@
     }
 
     const code = getQueryParam("code");
-
     const deepLink = `parenttracker://invite/${code}`;
 
-    // Open app here
     window.location.href = deepLink;
-
-    setTimeout(() => {
-      window.location.href = "https://play.google.com/store/apps/details?id=com.parenttracker";
-    }, 1500);
+    // Fallback disabled until PlayStore availability
   </script>
+
 </head>
 
 <body>
-  <h2>Opening Parent Tracker...</h2>
-  <p>If it doesn’t open, please install the app.</p>
-</body>
 
+  <div class="overlay"></div>
+
+  <div class="card">
+    <div class="logo">👨‍👩‍👧</div>
+
+    <h2 class="title">ParentTracker</h2>
+
+    <p class="desc">
+      Live location tracking, safety alerts, and<br>
+      family-first smart monitoring 💚
+    </p>
+
+    <div class="badge">
+      🚀 Launching Soon &nbsp; | &nbsp; Stay Protected
+    </div>
+  </div>
+
+</body>
 </html>
