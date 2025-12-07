@@ -1,4 +1,4 @@
-   <!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -107,17 +107,32 @@
   </style>
 
   <script>
-    function getQueryParam(param) {
-      const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get(param);
-    }
+  function getQueryParam(param) {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param);
+  }
 
-  //  const code = getQueryParam("code");
-  //  const deepLink = `parenttracker://invite/${code}`;
+  const code = getQueryParam("code");
 
- //   window.location.href = deepLink;
-    // Fallback disabled until PlayStore availability
-  </script>
+  if (code) {
+    const deepLink = `parenttracker://?code=${code}`;
+
+    // Try to open the app
+    window.location.href = deepLink;
+
+    // ⏳ Fallback → show web UI if app not installed
+    setTimeout(() => {
+      document.body.style.display = "block";
+    }, 1500);
+  } else {
+    // No code → just show the HTML page
+    document.body.style.display = "block";
+  }
+
+  // Hide UI while trying to redirect
+  document.body.style.display = "none";
+</script>
+
 
 </head>
 
