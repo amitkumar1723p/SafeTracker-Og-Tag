@@ -106,32 +106,7 @@
 
   </style>
 
-  <script>
-  function getQueryParam(param) {
-    const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get(param);
-  }
 
-  const code = getQueryParam("code");
-
-  if (code) {
-    const deepLink = `parenttracker://?code=${code}`;
-
-    // Try to open the app
-    window.location.href = deepLink;
-
-    // ⏳ Fallback → show web UI if app not installed
-    setTimeout(() => {
-      document.body.style.display = "block";
-    }, 1500);
-  } else {
-    // No code → just show the HTML page
-    document.body.style.display = "block";
-  }
-
-  // Hide UI while trying to redirect
-  document.body.style.display = "none";
-</script>
 
 
 </head>
@@ -156,4 +131,32 @@
   </div>
 
 </body>
+
+  <script>
+  window.onload = function () {
+    const code = new URLSearchParams(window.location.search).get("code");
+
+    if (code) {
+      const deepLink = `parenttracker://?code=${code}`;
+
+      // Hide UI before redirecting
+      document.body.style.display = "none";
+
+      // Try to open app
+      window.location.href = deepLink;
+
+      // If app NOT installed -> show web UI again
+      setTimeout(() => {
+        document.body.style.display = "block";
+      }, 1500);
+
+    } else {
+      document.body.style.display = "block";
+    }
+  };
+</script>
+
+
+
+
 </html>
