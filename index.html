@@ -149,29 +149,28 @@
 
 <script>
   window.onload = function () {
-    const code = new URLSearchParams(window.location.search).get("code");
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
 
-    if (code) {
-      // const deepLink = `parenttracker://?code=${code}`;
-
-
-      const deepLink = `intent://?code=${code}#Intent;scheme=parenttracker;package=com.parenttracker;end`;
-      window.location.href = deepLink;
-      // Hide UI before redirecting
-      document.body.style.display = "none";
-
-      // Try to open the app
-      window.location.href = deepLink;
-
-      // Fallback: show UI if app not installed
-      setTimeout(() => {
-        document.body.style.display = "flex";
-      }, 1500);
-
-    } else {
+    if (!code) {
+      // No code in URL -> just show landing UI
       document.body.style.display = "flex";
+      return;
     }
+
+    // Hide UI while trying to open app
+    document.body.style.display = "none";
+
+    // Custom scheme deep link -> OS will open ParentTracker app
+    const appUrl = `parenttracker://?code=${code}`;
+    window.location.href = appUrl;
+
+    // If app not installed -> after 1.5s show webpage again
+    setTimeout(() => {
+      document.body.style.display = "flex";
+    }, 1500);
   };
 </script>
+
 
 </html>
